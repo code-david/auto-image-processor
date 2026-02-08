@@ -1,8 +1,18 @@
+# Virtual environment
 .venv/
+
+# Python cache
 __pycache__/
 *.pyc
+
+# IDE files
 .idea/
 
+# Ignore output files but keep folder structure visible
 output_images/*
 !output_images/**/
 !output_images/**/.gitkeep
+
+# (Optional) OS junk
+.DS_Store
+Thumbs.db
