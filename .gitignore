@@ -1,0 +1,15 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Output images (generated)
+output/*
+!output/.gitkeep
+!output/compressed/.gitkeep
+
+# Input images (user-provided)
+input/*
+!input/.gitkeep
