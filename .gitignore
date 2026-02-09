@@ -5,11 +5,11 @@
 __pycache__/
 *.pyc
 
-# Output images (generated)
-output/*
-!output/.gitkeep
-!output/compressed/.gitkeep
+# Input images
+input_images/*
+!input_images/.gitkeep
 
-# Input images (user-provided)
-input/*
-!input/.gitkeep
+# Output images (generated)
+output_images/*
+!output_images/compressed/.gitkeep
+

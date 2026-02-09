@@ -1,8 +1,8 @@
 from pathlib import Path
 from src.image_compression import compress_image, is_image_file
 
-INPUT_DIR = Path("input")
-OUTPUT_DIR = Path("output/compressed")
+INPUT_DIR = Path("input_images")
+OUTPUT_DIR = Path("output_images/compressed")
 JPEG_QUALITY = 60  # lower = more compression
 
 
