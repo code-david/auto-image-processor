@@ -1,30 +1,32 @@
-from pathlib import Path
 import cv2
-
-SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-
-
-def is_image_file(file: Path) -> bool:
-    return file.is_file() and file.suffix.lower() in SUPPORTED_EXTENSIONS
+from pathlib import Path
 
 
-def compress_image(
-    input_path: Path,
-    output_path: Path,
-    quality: int = 60,
-):
-    image = cv2.imread(str(input_path))
+def is_image_file(path: Path) -> bool:
+    return path.suffix.lower() in [".jpg", ".jpeg", ".png"]
+
+
+def compress_image(image_path: Path, out_path: Path, quality: int = 60):
+    image = cv2.imread(str(image_path))
     if image is None:
-        raise ValueError(f"Cannot read image: {input_path}")
+        print(f"Failed to read image: {image_path.name}")
+        return
 
-    # Ensure output directory exists
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Always save as JPEG for compression
-    output_file = output_path.with_suffix(".jpg")
-
+    # Write compressed image
     cv2.imwrite(
-        str(output_file),
+        str(out_path),
         image,
         [cv2.IMWRITE_JPEG_QUALITY, quality]
     )
+
+    # ✅ ADD YOUR CODE RIGHT HERE
+    original_size = image_path.stat().st_size
+    compressed_size = out_path.stat().st_size
+
+    if compressed_size > original_size:
+        print(
+            f"⚠️ Warning: {image_path.name} became larger after compression "
+            f"({original_size} → {compressed_size} bytes)"
+        )
