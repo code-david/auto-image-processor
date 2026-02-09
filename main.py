@@ -21,8 +21,8 @@ OUT_RESIZED = Path("output_images/resized")
 JPEG_QUALITY = 60
 PIXEL_SIZE = 16
 BINARY_THRESHOLD = 128
-DEFAULT_W = 640
-DEFAULT_H = 480
+DEFAULT_W = 100
+DEFAULT_H = 100
 
 
 def usage():
