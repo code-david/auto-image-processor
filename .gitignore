@@ -5,10 +5,6 @@
 __pycache__/
 *.pyc
 
-# Input images
-input_images/*
-!input_images/.gitkeep
-
 # Output images (generated)
 output_images/*
 !output_images/compressed/.gitkeep
