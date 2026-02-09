@@ -43,7 +43,6 @@ def usage():
 
 def list_input_images():
     INPUT_DIR.mkdir(exist_ok=True)
-    # use one is_image_file implementation (from compression module)
     images = [f for f in INPUT_DIR.iterdir() if is_image_file_compress(f)]
     return images
 
