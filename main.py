@@ -4,16 +4,20 @@ import sys
 from src.image_compression import compress_image, is_image_file
 from src.pixelation import pixelate_image
 from src.binary import to_binary
+from src.resizing import resize_image
 
 INPUT_DIR = Path("input_images")
 
 OUT_COMPRESSED = Path("output_images/compressed")
 OUT_PIXELATED = Path("output_images/pixelated")
 OUT_BINARY = Path("output_images/binary")
+OUT_RESIZED = Path("output_images/resized")
 
 DEFAULT_QUALITY = 60
 DEFAULT_PIXEL_SIZE = 16
 DEFAULT_THRESHOLD = 128
+DEFAULT_W = 100
+DEFAULT_H = 100
 
 
 def usage():
@@ -21,11 +25,13 @@ def usage():
     print("  python main.py compress [quality]")
     print("  python main.py pixelate [pixel_size]")
     print("  python main.py binary [threshold]")
+    print("  python main.py resize [width height]")
     print("")
     print("Examples:")
     print("  python main.py compress 60")
     print("  python main.py pixelate 16")
     print("  python main.py binary 128")
+    print("  python main.py resize 100 100")
 
 
 def list_input_images():
@@ -55,6 +61,14 @@ def run_binary(images, threshold: int):
         out_path = OUT_BINARY / img.name
         to_binary(img, out_path, threshold=threshold)
         print(f"Binary: {img.name} (threshold={threshold})")
+
+
+def run_resize(images, width: int, height: int):
+    OUT_RESIZED.mkdir(parents=True, exist_ok=True)
+    for img in images:
+        out_path = OUT_RESIZED / img.name
+        resize_image(img, out_path, width=width, height=height)
+        print(f"Resized: {img.name} -> {width}x{height}")
 
 
 def main():
@@ -95,6 +109,16 @@ def main():
             except ValueError:
                 pass
         run_binary(images, max(0, min(255, t)))
+
+    elif mode == "resize":
+        w, h = DEFAULT_W, DEFAULT_H
+        if len(sys.argv) >= 4:
+            try:
+                w = int(sys.argv[2])
+                h = int(sys.argv[3])
+            except ValueError:
+                pass
+        run_resize(images, max(1, w), max(1, h))
 
     else:
         usage()
