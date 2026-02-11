@@ -11,7 +11,7 @@ __pycache__/
 # Pytest cache
 .pytest_cache/
 
-# Ignore generated outputs but keep folder structure visible
-output_images/*
+# Ignore generated outputs but keep folder structure 
+output_images/**
 !output_images/**/
 !output_images/**/.gitkeep
