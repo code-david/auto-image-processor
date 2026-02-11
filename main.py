@@ -59,7 +59,13 @@ def run_binary(images, threshold: int):
 
 def main():
     if len(sys.argv) < 2:
-        usage()
+        images = list_input_images()
+        if not images:
+            print("No images found in input_images/")
+            return
+        run_compress(images, DEFAULT_QUALITY)
+        run_pixelate(images, DEFAULT_PIXEL_SIZE)
+        run_binary(images, DEFAULT_THRESHOLD)
         return
 
     mode = sys.argv[1].lower()
