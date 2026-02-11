@@ -47,7 +47,12 @@ def run_pixelate(images, pixel_size: int):
 
 def main():
     if len(sys.argv) < 2:
-        usage()
+        images = list_input_images()
+        if not images:
+            print("No images found in input_images/")
+            return
+        run_compress(images, DEFAULT_QUALITY)
+        run_pixelate(images, DEFAULT_PIXEL_SIZE)
         return
 
     mode = sys.argv[1].lower().strip()
@@ -79,7 +84,6 @@ def main():
 
     else:
         usage()
-
-
+        
 if __name__ == "__main__":
     main()
